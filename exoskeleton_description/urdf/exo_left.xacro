@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find exoskeleton_description)/urdf/exo.gazebo.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/exo.transmission.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/utilities.xacro" />
+
+  <xacro:property name="safety_controller_k_pos" value="100" />
+  <xacro:property name="safety_controller_k_vel" value="100" />
+  <xacro:property name="joint_damping" value="0.4" />
+  <xacro:property name="joint_static_friction" value="0.4" />
+  <xacro:property name="max_effort" value="300"/>
+  <xacro:property name="max_velocity" value="10"/>
+
+  <xacro:macro name="exo_left" params="parent hardware_interface robot_name *origin">
+
+    <!-- Connection joint -->
+    <joint name="${parent}_${robot_name}_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${robot_name}_link_0"/>
+    </joint>
+
+    <link name="${robot_name}_link_0">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="1.0"
+          iyz="0.0"
+          izz="1.0" />
+        </inertial>
+      <visual>
+        <origin xyz="-0.1 -0.05 -0.05" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/base_short.stl" 
+            scale="0.01 0.01 0.01" />
+          <material>
+            <color rgba="1 0 0 1" />
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${robot_name}_joint_1" type="revolute">
+      <origin
+        xyz="-0.1 0 0"
+        rpy="0 3.1415 0" />
+      <parent
+        link="${robot_name}_link_0" />
+      <child
+        link="${robot_name}_link_1" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-170 * PI / 180}" upper="${170 * PI / 180}"
+             effort="${max_effort}" velocity="${max_velocity}" />
+      <dynamics damping="${joint_damping}" friction="${joint_static_friction}"/>
+    </joint>
+
+    <link name="${robot_name}_link_1">
+      <inertial>
+        <origin xyz="0.5 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="0.0"
+          iyz="0.0"
+          izz="1.0" />
+        </inertial>
+      <visual>
+        <origin xyz="0.1 -0.05 -0.05" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/link.stl" 
+            scale="0.01 0.01 0.01" />
+          <material>
+            <color rgba="0 1 0 1" />
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${robot_name}_joint_2" type="revolute">
+      <origin
+        xyz="1.15 0 -0.05"
+        rpy="0 0 0" />
+      <parent
+        link="${robot_name}_link_1" />
+      <child
+        link="${robot_name}_link_2" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-170 * PI / 180}" upper="${170 * PI / 180}"
+             effort="${max_effort}" velocity="${max_velocity}" />
+      <dynamics damping="${joint_damping}" friction="${joint_static_friction}"/>
+    </joint>
+
+    <link name="${robot_name}_link_2">
+      <inertial>
+        <origin xyz="0.5 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="0.0"
+          iyz="0.0"
+          izz="1.0" />
+        </inertial>
+      <visual>
+        <origin xyz="0.05 -0.05 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/link.stl" 
+            scale="0.01 0.01 0.01" />
+          <material>
+            <color rgba="0 0 1 1" />
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <!--Extensions -->
+    <xacro:exo_gazebo robot_name="${robot_name}" />
+    <xacro:exo_transmission hardware_interface="${hardware_interface}"/>
+
+  </xacro:macro>
+
+</robot>

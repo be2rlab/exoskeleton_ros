@@ -1,0 +1,15 @@
+<package>
+  <name>exoskeleton_description</name>
+  <version>1.0.0</version>
+  <description>
+    URDF for exoskeleton
+  </description>
+  <author>Kirill Artemov</author>
+  <maintainer email="kaartemov@gmail.com" />
+  <license>MIT</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+    <architecture_independent />
+  </export>
+</package>
