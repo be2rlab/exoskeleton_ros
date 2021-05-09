@@ -4,7 +4,7 @@
     <arg name="hardware_interface" default="EffortJointInterface" />
     <arg name="robot_name" default="exo" />
     <arg name="model" default="exo_left"/>
-    <arg name="gui" default="true"/>
+    <arg name="gui" default="false"/>
 
     <include file="$(find exoskeleton_gazebo)/launch/exo_world.launch">
         <arg name="hardware_interface" value="$(arg hardware_interface)" />

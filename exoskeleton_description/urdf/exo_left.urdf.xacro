@@ -16,4 +16,8 @@
     <origin xyz="$(arg origin_xyz)" rpy="$(arg origin_rpy)" />
   </xacro:exo_left>
 
+  <!-- <xacro:exo_left hardware_interface="$(arg hardware_interface)" robot_name="exo2" parent="world">
+    <origin xyz="1 0 2" rpy="$(arg origin_rpy)" />
+  </xacro:exo_left> -->
+
 </robot>

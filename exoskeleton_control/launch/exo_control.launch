@@ -26,4 +26,9 @@
         <param name="publish_frequency" value="$(arg robot_state_frequency)" />
     </node>
 
+    <node name="robot_state_publisher2" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="joint_states" to="/exo2/joint_states" />
+        <param name="publish_frequency" value="$(arg robot_state_frequency)" />
+    </node>
+
 </launch>

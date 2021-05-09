@@ -39,11 +39,19 @@
           <mesh
             filename="package://exoskeleton_description/meshes/base_short.stl" 
             scale="0.01 0.01 0.01" />
-          <material>
-            <color rgba="1 0 0 1" />
-          </material>
         </geometry>
+<material name="Grey"/>
       </visual>
+
+      <!-- <collision>
+        <origin xyz="-0.1 -0.05 -0.05" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/base_short.stl" 
+            scale="0.01 0.01 0.01" />
+        </geometry>
+<material name="Grey"/>
+      </collision> -->
     </link>
 
     <joint name="${robot_name}_joint_1" type="revolute">
@@ -78,11 +86,18 @@
           <mesh
             filename="package://exoskeleton_description/meshes/link.stl" 
             scale="0.01 0.01 0.01" />
-          <material>
-            <color rgba="0 1 0 1" />
-          </material>
         </geometry>
+<material name="Grey"/>
       </visual>
+      <!-- <collision>
+        <origin xyz="0.1 -0.05 -0.05" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/link.stl" 
+            scale="0.01 0.01 0.01" />
+        </geometry>
+<material name="Grey"/>
+      </collision> -->
     </link>
 
     <joint name="${robot_name}_joint_2" type="revolute">
@@ -117,16 +132,23 @@
           <mesh
             filename="package://exoskeleton_description/meshes/link.stl" 
             scale="0.01 0.01 0.01" />
-          <material>
-            <color rgba="0 0 1 1" />
-          </material>
         </geometry>
+<material name="Grey"/>
       </visual>
+      <!-- <collision>
+        <origin xyz="0.05 -0.05 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/link.stl" 
+            scale="0.01 0.01 0.01" />
+        </geometry>
+<material name="Grey"/>
+      </collision> -->
     </link>
 
     <!--Extensions -->
     <xacro:exo_gazebo robot_name="${robot_name}" />
-    <xacro:exo_transmission hardware_interface="${hardware_interface}"/>
+    <xacro:exo_transmission hardware_interface="${hardware_interface}" robot_name="$(arg robot_name)"/>
 
   </xacro:macro>
 

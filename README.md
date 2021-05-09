@@ -1,16 +1,26 @@
 
 ### [simulation] Exoskeleton control sketch
 
+#### Requirenments
+
+##### ros-noetic
+
+```
+sudo apt install -y ros-noetic-kdl-parser-py 
+```
+
+
+
 To start a gazebo scene
 
 ```bash
-roslaunch profi2021_master_scene start_scene.launch
+roslaunch exoskeleton_scene start_scene.launch
 ```
 
 To start a control algorithm
 
 ```bash
-roslaunch profi2021_master_solution solution.launch
+roslaunch safety_control start.launch
 ```
 
 To start controllers
