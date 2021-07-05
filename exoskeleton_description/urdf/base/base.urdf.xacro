@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find exoskeleton_description)/urdf/base/base.gazebo.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/base/base.transmission.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/utilities.urdf.xacro" />
+
+  <xacro:macro name="base" params="parent name *origin">
+
+    <!-- Connection joint -->
+    <joint name="${name}_footprint_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="base_link"/>
+    </joint>
+
+    <link name="base_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="1.0"
+          iyz="0.0"
+          izz="1.0" />
+        </inertial>
+      <visual>
+        <origin xyz="-0.5 -0.05 -0.05" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://exoskeleton_description/meshes/base_bulk.stl" 
+            scale="0.01 0.01 0.01" />
+        </geometry>
+        <material name="Grey"/>
+      </visual>
+    </link>
+
+    <!--Extensions -->
+    <xacro:base_gazebo name="${name}" />
+    <!-- <xacro:base_transmission name="$(name)"/> -->
+
+  </xacro:macro>
+
+</robot>

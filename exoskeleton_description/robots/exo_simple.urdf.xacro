@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="exo_simple" >
+  
+  <xacro:include filename="$(find exoskeleton_description)/urdf/base/base.urdf.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/arm/arm.urdf.xacro"/>
+  <xacro:include filename="$(find exoskeleton_description)/controller/ros_controller.urdf.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find exoskeleton_description)/urdf/utilities.urdf.xacro" />
+
+  <xacro:arg name="origin_xyz" default="0 0 0"/>
+  <xacro:arg name="origin_rpy" default="0 0 0"/>
+
+  <link name="world" />
+
+  <xacro:base name="base" parent="world">
+    <origin xyz="$(arg origin_xyz)" rpy="$(arg origin_rpy)" />
+  </xacro:base>
+  
+  <xacro:arm name="arm_1" parent="base_link" color="Green">
+    <origin xyz="0.5 0 0" rpy="3.1415 0 3.1415" />
+  </xacro:arm>
+
+  <xacro:arm name="arm_2" parent="base_link" color="Blue">
+    <origin xyz="-0.5 0 0" rpy="0 0 0" />
+  </xacro:arm>
+
+
+    <joint name="obstacle_joint" type="fixed">
+      <origin
+        xyz="1.25 -1 0"
+        rpy="0 0 0" />
+      <parent
+        link="world" />
+      <child
+        link="obstacle_link" />
+    </joint>
+
+    <link name="obstacle_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1000" />
+        <inertia
+          ixx="1.0"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="0.0"
+          iyz="0.0"
+          izz="1.0" />
+        </inertial>
+      <visual>
+        <origin xyz="0.25 0.25 1.5" rpy="0 0 0" />
+        <geometry>
+          <box size="0.5 0.5 3" />
+        </geometry>
+        <material name="Orange"/>
+      </visual>
+    </link>
+
+
+
+</robot>

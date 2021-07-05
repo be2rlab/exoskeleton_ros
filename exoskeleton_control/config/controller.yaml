@@ -1,25 +1,25 @@
-# exo:
+# arm:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 200
 
   # сontrollers for singular joint ------------------------------------
-  joint1_torque_controller:
+  arm_1_joint1_torque_controller:
     type: effort_controllers/JointEffortController
-    joint: exo_joint_1
+    joint: arm_1_joint_1
     pid: {p: 800, i: 0.5, d: 10}
-  joint2_torque_controller:
+  arm_1_joint2_torque_controller:
     type: effort_controllers/JointEffortController
-    joint: exo_joint_2
+    joint: arm_1_joint_2
     pid: {p: 1000, i: 0.5, d: 10}
-  
-  # Position Controllers ---------------------------------------
-  joint1_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: exo_joint_1
-    pid: {p: 200, i: 0.5, d: 10}
-  joint2_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: exo_joint_2
-    pid: {p: 300, i: 0.5, d: 10}
+
+  # сontrollers for singular joint ------------------------------------
+  arm_2_joint1_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: arm_2_joint_1
+    pid: {p: 800, i: 0.5, d: 10}
+  arm_2_joint2_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: arm_2_joint_2
+    pid: {p: 1000, i: 0.5, d: 10}
